@@ -10,11 +10,15 @@ module.exports = {
   theme: {
     extend: {
 
-      colors: {
-        primary: '#3D64F4',
-        authbackground: '#1F2B43'
-
-      },
+      // colors: {
+      //   primary: '#49129C',
+      //   secondary: {
+      //     DEFAULT: '#B40086',
+      //     100: '#C51297',
+      //     200: '#831266',
+      //   },
+      //   tertiary: '#EF2967',
+      // },
 
       fontFamily: {
         'spacemono': ['SpaceMono', 'sans-serif'],
