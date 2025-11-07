@@ -1,0 +1,23 @@
+// ./sync-movies/tsconfig.json
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2020",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node"
+  },
+  "ts-node": {
+    // These options are read by ts-node
+    "compilerOptions": {
+      // tell ts-node to treat files as CommonJS
+      "module": "CommonJS"
+    }
+  },
+  "include": ["src/**/*.ts"]
+}

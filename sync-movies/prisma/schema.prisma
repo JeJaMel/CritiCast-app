@@ -1,0 +1,79 @@
+// This is your Prisma schema file.
+// Learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  username     String    @unique
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  userType     String    @default("regular") @map("user_type")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  comments     Comment[]
+
+  @@map("users")
+}
+
+model Movie {
+  id                  Int         @id
+  title               String
+  originalTitle       String?     @map("original_title")
+  description         String?
+  releaseDate         DateTime?   @map("release_date")
+  tmdbRating          Float?      @map("tmdb_rating")
+  userRating          Float       @default(0) @map("user_rating")
+  userRatingCount     Int         @default(0) @map("user_rating_count")
+  posterUrl           String?     @map("poster_url")
+  backdropUrl         String?     @map("backdrop_url")
+  genres              String[]
+  durationMinutes     Int?        @map("duration_minutes")
+  budget              BigInt?
+  productionCompanies String[]    @map("production_companies")
+  createdAt           DateTime    @default(now()) @map("created_at")
+  updatedAt           DateTime    @updatedAt @map("updated_at")
+  cast                MovieCast[]
+  comments            Comment[]
+
+  @@map("movies")
+}
+
+model Actor {
+  id        Int         @id
+  name      String
+  avatarUrl String?     @map("avatar_url")
+  movies    MovieCast[]
+
+  @@map("actors")
+}
+
+model MovieCast {
+  movieId       Int     @map("movie_id")
+  actorId       Int     @map("actor_id")
+  characterName String? @map("character_name")
+  movie         Movie   @relation(fields: [movieId], references: [id])
+  actor         Actor   @relation(fields: [actorId], references: [id])
+
+  @@id([movieId, actorId])
+  @@map("movie_cast")
+}
+
+model Comment {
+  id          Int      @id @default(autoincrement())
+  userId      Int      @map("user_id")
+  movieId     Int      @map("movie_id")
+  rating      Float
+  commentText String?  @map("comment_text")
+  createdAt   DateTime @default(now()) @map("created_at")
+  user        User     @relation(fields: [userId], references: [id])
+  movie       Movie    @relation(fields: [movieId], references: [id])
+
+  @@map("comments")
+}

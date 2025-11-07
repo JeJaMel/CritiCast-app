@@ -43,3 +43,7 @@ app-example
 /android
 
 .env
+
+# Prisma generated client / runtime artifacts
+.prisma/
+.prisma-client/
