@@ -1,0 +1,9 @@
+export interface User {
+    id: number;
+    email: string;
+    username: string;
+}
+
+export interface UpdateUserPayload {
+    username?: string;
+}
