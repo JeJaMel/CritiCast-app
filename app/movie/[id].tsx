@@ -1,10 +1,10 @@
 import { View, Text, ActivityIndicator, ScrollView } from 'react-native'
 import React from 'react'
 import { useLocalSearchParams } from 'expo-router'
-import MovieHeader from '@/components/movie/MovieHeader';
-import MovieDescription from '@/components/movie/MovieDescription';
-import MovieCast from '@/components/movie/MovieCast';
-import { useMovie } from '@/hooks/useMovie';
+import MovieHeader from '@/presentation/movie/components/MovieHeader';
+import MovieDescription from '@/presentation/movie/components/MovieDescription';
+import MovieCast from '@/presentation/movie/components/MovieCast';
+import { useMovie } from '@/presentation/movie/hooks/useMovie';
 
 const MovieScreen = () => {
 
