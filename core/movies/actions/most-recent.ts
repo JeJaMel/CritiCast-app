@@ -12,7 +12,7 @@ export const mostRecentAction = async ({ page = 1, limit = 15 }: FetchMoviesOpti
         const { data } = await moviesApi.get<any>('/movies', {
             params: {
                 page: page,
-                 limit: limit,
+                limit: limit,
                 sortBy: 'release_date',
             }
         })

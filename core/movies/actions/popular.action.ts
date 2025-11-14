@@ -1,5 +1,6 @@
 import { moviesApi } from "@/core/api/api";
-import { Movie } from "@/sync-movies/src/interfaces/movie.interface";
+import { MoviesUI } from "../interfaces/moviesUI.interface";
+import { mapApiMoviesToMoviesUI } from "../mappers/movies.mapper";
 
 interface FetchMoviesOptions {
     page?: number;
@@ -8,13 +9,18 @@ interface FetchMoviesOptions {
 
 export const popularMoviesAction = async ({ page = 1, limit = 15 }: FetchMoviesOptions) => {
     try {
-        const { data } = await moviesApi.get<Movie>('/movies/', {
+        const { data } = await moviesApi.get<any>('/movies/', {
             params: {
                 page: page,
+                limit: limit,
                 sortBy: 'user_rating',
             }
         })
-        return data;
+        const mappedMovies: MoviesUI[] = mapApiMoviesToMoviesUI(data.items);
+        return {
+            ...data,
+            items: mappedMovies,
+        };
     } catch (error) {
         console.log(error);
         throw 'Cannot load now playing movies!';

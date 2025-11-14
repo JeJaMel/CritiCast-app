@@ -19,7 +19,19 @@ export const useMovies = () => {
         queryKey: ['movies', 'popular'],
         queryFn: ({ pageParam }) => { return popularMoviesAction({ page: pageParam }) },
         staleTime: 1000 * 60 * 60 * 24, //24 hours
-        getNextPageParam: (lastPage, pages) => pages.length + 1,
+        getNextPageParam: (lastPage) => {
+            if (lastPage.items.length < 15) return undefined;
+            return lastPage.page + 1;
+        },
+        select: (data) => {
+            const allMovies = data.pages.map(page => page.items).flat();
+            const uniqueMovies = removeDuplicateMovies(allMovies);
+
+            return {
+                pages: [{ items: uniqueMovies }],
+                pageParams: data.pageParams,
+            };
+        },
     })
 
     const topRatedQuery = useInfiniteQuery({
@@ -27,7 +39,19 @@ export const useMovies = () => {
         queryKey: ['movies', 'topRated'],
         queryFn: ({ pageParam }) => { return topRatedMoviesAction({ page: pageParam }) },
         staleTime: 1000 * 60 * 60 * 24, //24 hours
-        getNextPageParam: (lastPage, pages) => pages.length + 1,
+        getNextPageParam: (lastPage) => {
+            if (lastPage.items.length < 15) return undefined;
+            return lastPage.page + 1;
+        },
+        select: (data) => {
+            const allMovies = data.pages.map(page => page.items).flat();
+            const uniqueMovies = removeDuplicateMovies(allMovies);
+
+            return {
+                pages: [{ items: uniqueMovies }],
+                pageParams: data.pageParams,
+            };
+        },
     });
 
     const upcomingQuery = useInfiniteQuery({
@@ -36,23 +60,14 @@ export const useMovies = () => {
         queryFn: ({ pageParam }) => mostRecentAction({ page: pageParam }),
         staleTime: 1000 * 60 * 60 * 24,
         getNextPageParam: (lastPage) => {
-            // Esta lógica no cambia, sigue siendo correcta
             if (lastPage.items.length < 15) return undefined;
             return lastPage.page + 1;
         },
 
-        // ¡AQUÍ ESTÁ LA SOLUCIÓN!
-        // `select` transforma los datos DESPUÉS de que se reciben y ANTES de que se entreguen al componente.
         select: (data) => {
-            // 1. Aplanamos todos los arrays de 'items' de todas las páginas en un solo gran array.
             const allMovies = data.pages.map(page => page.items).flat();
-
-            // 2. Usamos nuestra función helper para limpiar los duplicados.
             const uniqueMovies = removeDuplicateMovies(allMovies);
 
-            // 3. Devolvemos un objeto con la misma estructura que 'data', pero con los datos ya limpios.
-            //    Envolvemos todas las películas únicas en una sola "mega-página".
-            //    Esto simplifica enormemente el código en nuestro componente.
             return {
                 pages: [{ items: uniqueMovies }],
                 pageParams: data.pageParams,

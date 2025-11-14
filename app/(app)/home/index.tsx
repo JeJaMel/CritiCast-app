@@ -18,6 +18,9 @@ const HomeScreen = () => {
     }
 
     const upcomingMovies = upcomingQuery.data?.pages[0]?.items ?? [];
+    const topRatedMovies = topRatedQuery.data?.pages[0]?.items ?? [];
+    const popularMovies = popularQuery.data?.pages[0]?.items ?? [];
+
 
     return (
         <ScrollView className='bg-[#25273c]' >
@@ -27,8 +30,8 @@ const HomeScreen = () => {
                 {/* Images Carousel */}
                 <MainSlideShow movies={nowPlayingQuery.data ?? []} />
 
-                {/* <MovieHorizontalList
-                    movies={popularQuery.data?.pages.flat() ?? []}
+                <MovieHorizontalList
+                    movies={popularMovies}
                     title='Popular Movies'
                     classNameText='text-neutral-300'
                     classNameView='mb-5'
@@ -36,16 +39,16 @@ const HomeScreen = () => {
                 />
 
                 <MovieHorizontalList
-                    movies={topRatedQuery.data?.pages.flat() ?? []}
+                    movies={topRatedMovies}
                     title='Top Rated Movies'
                     classNameText='text-neutral-300'
                     classNameView='mb-5'
                     loadNextPage={topRatedQuery.fetchNextPage}
-                /> */}
+                />
 
                 <MovieHorizontalList
                     movies={upcomingMovies}
-                    title='Upcoming Movies'
+                    title='New Movies'
                     classNameText='text-neutral-300'
                     classNameView='mb-5'
                     loadNextPage={upcomingQuery.fetchNextPage}
