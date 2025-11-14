@@ -1,33 +1,22 @@
 import { View, Text, FlatList, ActivityIndicator } from 'react-native'
-import { useEffect, useRef, useState } from 'react';
-import { Movie } from '@/sync-movies/src/interfaces/movie.interface';
 import MoviePoster from './MoviePoster';
+import { MoviesUI } from '@/core/movies/interfaces/moviesUI.interface';
 
 interface Props {
     title?: string;
-    movies: Movie[];
+    movies: MoviesUI[];
     classNameView?: string;
     classNameText?: string;
+    isFetchingNextPage?: boolean;
 
     loadNextPage?: () => void;
 }
 
-const MovieHorizontalList = ({ title, movies, classNameView, classNameText, loadNextPage }: Props) => {
-
-    const isLoading = useRef(false);
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        // setTimeout(() => {
-        isLoading.current = false
-        setLoading(false);
-        // }, 200)
-    }, [movies])
+const MovieHorizontalList = ({ title, movies, classNameView, classNameText, loadNextPage, isFetchingNextPage }: Props) => {
 
     const onEndReached = () => {
-        if (isLoading.current) return;
-        isLoading.current = true;
-        setLoading(true);
+        if (isFetchingNextPage) return;
+
         console.log('Loading next Movies...');
         loadNextPage && loadNextPage();
     };
@@ -40,12 +29,13 @@ const MovieHorizontalList = ({ title, movies, classNameView, classNameText, load
                 horizontal
                 data={movies}
                 showsHorizontalScrollIndicator={false}
-                keyExtractor={(item, i) => `${item.id}-${i}`}
+                keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => <MoviePoster id={item.id} poster={item.poster} smallPoster />}
                 onEndReached={onEndReached}
                 onEndReachedThreshold={0.8}
                 ListFooterComponent={
-                    loading ? (
+                    // El ActivityIndicator ahora se basa en la prop
+                    isFetchingNextPage ? (
                         <View style={{ width: 80, justifyContent: 'center', alignItems: 'center' }}>
                             <ActivityIndicator size="large" color="#999" />
                         </View>

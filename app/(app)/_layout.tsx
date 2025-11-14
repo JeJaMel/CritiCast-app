@@ -44,8 +44,6 @@ const DrawerLayout = () => {
                 headerRightContainerStyle: { paddingRight: 10 },
             }}
         >
-
-
         </Drawer>
     )
 };

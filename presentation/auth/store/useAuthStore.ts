@@ -43,8 +43,28 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
 
 
     checkStatus: async () => {
-        const resp = await authCheckStatus();
-        get().changeStatus(resp?.token, resp?.user);
+        // 1. Primero, busca el token en el almacenamiento seguro.
+        const token = await SecureStorageAdapter.getItem('token');
+        if (!token) {
+            // Si no hay token, no hay sesión que verificar.
+            set({ status: 'unauthenticated', token: undefined, user: undefined });
+            return;
+        }
+
+        // 2. Si hay un token, intenta obtener los datos del usuario.
+        // El interceptor de axios usará automáticamente este token.
+        const user = await authCheckStatus();
+
+        if (user) {
+            // 3. Si la API devuelve un usuario, el token es válido.
+            // Rehidratamos el estado con el TOKEN ORIGINAL y el USUARIO FRESCO.
+            set({ status: 'authenticated', token: token, user: user });
+        } else {
+            // 4. Si la API devuelve null, el token es inválido o ha expirado.
+            // Limpiamos el estado.
+            set({ status: 'unauthenticated', token: undefined, user: undefined });
+            await SecureStorageAdapter.deleteItem('token'); // Limpia el token inválido
+        }
     },
 
 

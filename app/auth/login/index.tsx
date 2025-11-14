@@ -45,7 +45,7 @@ const LoginScreen = () => {
         setIsPosting(false)
 
         if (wasSuccesful) {
-            router.replace('/')
+            router.replace('/(app)/home')
             return;
         }
 

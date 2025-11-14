@@ -3,7 +3,7 @@ import { CompletedMovie } from "@/sync-movies/src/interfaces/movie.interface";
 
 export const getMovieByIdAction = async (id: number | string): Promise<CompletedMovie> => {
     try {
-        const { data } = await moviesApi.get<CompletedMovie>(`/${id}`)
+        const { data } = await moviesApi.get<CompletedMovie>(`/movies/${id}`)
 
         return data
     } catch (error) {

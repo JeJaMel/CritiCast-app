@@ -32,12 +32,12 @@ export const authSignUp = async (email: string, password: string, username: stri
     }
 }
 
-export const authCheckStatus = async () => {
+export const authCheckStatus = async (): Promise<User | null> => {
     try {
-        const { data } = await moviesApi.get<AuthResponse>('/users/me')
+        const { data } = await moviesApi.get<User>('/users/me');
         return data
     } catch (error) {
-        console.log(error)
+        console.log('Token validation failed:', error);
         return null;
     }
 }

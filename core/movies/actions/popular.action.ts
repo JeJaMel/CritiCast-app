@@ -8,9 +8,10 @@ interface FetchMoviesOptions {
 
 export const popularMoviesAction = async ({ page = 1, limit = 15 }: FetchMoviesOptions) => {
     try {
-        const { data } = await moviesApi.get<Movie>('/popular', {
+        const { data } = await moviesApi.get<Movie>('/movies/', {
             params: {
                 page: page,
+                sortBy: 'user_rating',
             }
         })
         return data;

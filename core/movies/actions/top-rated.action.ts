@@ -8,9 +8,10 @@ interface FetchMoviesOptions {
 
 export const topRatedMoviesAction = async ({ page = 1, limit = 15 }: FetchMoviesOptions) => {
     try {
-        const { data } = await moviesApi.get<Movie>('/top_rated', {
+        const { data } = await moviesApi.get<Movie>('/movies', {
             params: {
-                page: page,
+                page,
+                sortBy: 'tmdb_rating', 
             }
         })
         return data;
