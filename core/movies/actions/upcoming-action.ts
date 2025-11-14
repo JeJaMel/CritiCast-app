@@ -1,4 +1,4 @@
-import { moviesApi } from "@/core/api/movie-api";
+import { moviesApi } from "@/core/api/api";
 import { Movie } from "@/sync-movies/src/interfaces/movie.interface";
 
 interface FetchMoviesOptions {

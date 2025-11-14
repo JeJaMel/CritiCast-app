@@ -1,4 +1,4 @@
-import { moviesApi } from "../../api/movie-api";
+import { moviesApi } from "../../api/api";
 import { CompletedMovie } from "@/sync-movies/src/interfaces/movie.interface";
 
 export const getMovieByIdAction = async (id: number | string): Promise<CompletedMovie> => {

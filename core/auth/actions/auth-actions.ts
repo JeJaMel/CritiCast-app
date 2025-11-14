@@ -1,4 +1,4 @@
-import { moviesApi } from "@/core/api/movie-api";
+import { moviesApi } from "@/core/api/api";
 import { User } from "../interfaces/user";
 
 export interface AuthResponse {

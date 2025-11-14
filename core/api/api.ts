@@ -14,7 +14,7 @@ export const API_URL =
 console.log({ STAGE, [Platform.OS]: API_URL })
 
 const moviesApi = axios.create({
-    baseURL: API_URL,
+    baseURL: `${API_URL}/api`,
 })
 
 moviesApi.interceptors.request.use(async (config) => {

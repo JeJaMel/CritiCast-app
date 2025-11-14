@@ -1,4 +1,4 @@
-import { moviesApi } from "../../api/movie-api";
+import { moviesApi } from "../../api/api";
 import { Movie } from "@/sync-movies/src/interfaces/movie.interface";
 
 export const nowPlayingAction = async () => {

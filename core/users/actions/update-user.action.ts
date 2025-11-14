@@ -1,4 +1,4 @@
-import { moviesApi } from "@/core/api/movie-api";
+import { moviesApi } from "@/core/api/api";
 import { UpdateUserPayload, User } from "@/core/auth/interfaces/user";
 
 export const updateUserAction = async (payload: UpdateUserPayload): Promise<User> => {
