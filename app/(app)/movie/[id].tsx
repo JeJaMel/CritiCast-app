@@ -7,12 +7,16 @@ import MovieCast from '@/presentation/movie/components/MovieCast';
 import { useMovie } from '@/presentation/movie/hooks/useMovie';
 import MovieLoading from '@/presentation/movie/components/MovieLoading';
 import { Ionicons } from '@expo/vector-icons';
-import FloatingActionButton from '@/presentation/movie/components/FloatingActionButton';
 import GradientDivider from '@/presentation/shared/components/GradientDivider';
+import { useAuthStore } from '@/presentation/auth/store/useAuthStore';
+import MovieComments from '@/presentation/comments/components/MovieComments';
 
 const MovieScreen = () => {
     const { id } = useLocalSearchParams();
     const { movieQuery, castQuery } = useMovie(+id);
+
+    const movieId = +id;
+    const { user } = useAuthStore();
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
     const slideAnim = useRef(new Animated.Value(50)).current;
@@ -111,11 +115,23 @@ const MovieScreen = () => {
                         {/* Bottom Spacing */}
                         <View className='h-12' />
                     </View>
+
+                    <View className='px-4 mb-8'>
+                        <GradientDivider colors={['transparent', 'rgba(59, 130, 246, 0.3)', 'transparent']} />
+                    </View>
+
+                    <View className='mb-8'>
+                        <MovieComments
+                            movieId={movieId}
+                            currentUserId={user?.id} 
+                        />
+                    </View>
+
+                    <View className='h-12' />
+
                 </Animated.View>
             </ScrollView>
 
-            {/* Floating Action Button TODO: add rating */}
-            <FloatingActionButton />
         </View>
     );
 };
