@@ -1,12 +1,11 @@
-import { useAuthStore } from '@/presentation/auth/store/useAuthStore';
-import CustomDrawerContent from '@/presentation/shared/components/CustomDrawer';
-import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color';
+import React, { useEffect } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 import { Redirect } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
-import { useEffect } from 'react';
-import { ActivityIndicator, View } from 'react-native';
-// import { Ionicons } from '@expo/vector-icons';
-// import LogoutIconButton from '@/presentation/auth/components/LogoutIconButton';
+import CustomDrawerContent from '@/presentation/shared/components/CustomDrawer';
+import HeaderContent from '@/presentation/shared/components/HeaderContent';
+import { useAuthStore } from '@/presentation/auth/store/useAuthStore';
+import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color';
 
 const DrawerLayout = () => {
     const { status, checkStatus } = useAuthStore();
@@ -14,13 +13,13 @@ const DrawerLayout = () => {
 
     useEffect(() => {
         checkStatus();
-        //eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (status === 'checking') {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator color="blue" size={60} />
+            <View className="flex-1 justify-center items-center">
+                <ActivityIndicator color="#3b82f6" size={60} />
             </View>
         );
     }
@@ -33,18 +32,25 @@ const DrawerLayout = () => {
         <Drawer
             drawerContent={(props) => <CustomDrawerContent {...props} />}
             screenOptions={{
-                headerStyle: { backgroundColor: backgroundColor },
+                headerTitle: () => <HeaderContent />,
+                headerTitleAlign: 'left',
+                headerStyle: {
+                    backgroundColor: backgroundColor,
+                    height: 88,
+                    elevation: 0,
+                    shadowOpacity: 0,
+                },
                 headerTintColor: '#ECEDEE',
-                // headerTitleStyle: { fontFamily: 'Kanit-Bold' },
                 drawerStyle: { backgroundColor: backgroundColor },
                 drawerActiveTintColor: '#3b82f6',
-                drawerInactiveTintColor: 'grey',
+                drawerInactiveTintColor: '#9ca3af',
                 headerShadowVisible: false,
                 headerLeftContainerStyle: { paddingLeft: 10 },
                 headerRightContainerStyle: { paddingRight: 10 },
             }}
         >
         </Drawer>
-    )
+    );
 };
+
 export default DrawerLayout;

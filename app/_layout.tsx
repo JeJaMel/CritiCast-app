@@ -1,5 +1,6 @@
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { Stack } from 'expo-router';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import { PaperProvider } from 'react-native-paper';
 
 import "../global.css";
 
@@ -9,7 +10,9 @@ const RootLayout = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Stack screenOptions={{ headerShown: false }} />
+      <PaperProvider>
+        <Stack screenOptions={{ headerShown: false }} />
+      </PaperProvider>
     </QueryClientProvider>
   );
 }

@@ -1,7 +1,7 @@
 import MovieHorizontalList from '@/presentation/Movies/components/MovieHorizontalList';
 import { useMovies } from '@/presentation/Movies/hooks/useMovies';
 import MainSlideShow from '@/presentation/shared/components/MainSlideShow';
-import { ActivityIndicator, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
@@ -25,7 +25,6 @@ const HomeScreen = () => {
     return (
         <ScrollView className='bg-[#25273c]' >
             <View className='  mt2 bg-[#161722] pb-20 ' style={{ paddingTop: safeArea.top }} >
-                <Text className='text-4xl font-bold px-4 mb-1 mt-1 text-neutral-300' >Movie App</Text>
 
                 {/* Images Carousel */}
                 <MainSlideShow movies={nowPlayingQuery.data ?? []} />
