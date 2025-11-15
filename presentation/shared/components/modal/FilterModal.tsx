@@ -21,9 +21,9 @@ const FilterModal = ({ visible, onClose, onApply }: FilterModalProps) => {
     const [sortBy, setSortBy] = useState('rating');
 
     const categories = [
-        'Action', 'Adventure', 'Animation', 'Comedy', 'Crime',
-        'Documentary', 'Drama', 'Fantasy', 'Horror', 'Mystery',
-        'Romance', 'Sci-Fi', 'Thriller', 'War', 'Western'
+        'Action', 'Adventure', 'Animation', 'Comedy', 'Science-Fiction',
+        'Crime', 'Documentary', 'Drama', 'Fantasy', 'Horror', 'Mystery',
+        'Romance', 'Thriller', 'War', 'Western'
     ];
 
     const ratings = ['8+', '7+', '6+', '5+'];
