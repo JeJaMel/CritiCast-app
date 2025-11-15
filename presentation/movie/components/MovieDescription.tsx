@@ -30,7 +30,7 @@ const MovieDescription = ({ movie }: Props) => {
             {/* Description */}
             <View className='mb-4'>
                 <View className='flex-row items-center mb-3'>
-                    <View className='w-1 h-5 bg-blue-500 rounded-full mr-3' />
+                    <View style={{ width: 4, height: 20, backgroundColor: '#3b82f6', borderRadius: 999, marginRight: 12 }} />
                     <Text className='text-white text-lg font-bold'>Overview</Text>
                 </View>
                 <Text className='text-white/80 text-base leading-6'>
@@ -39,7 +39,7 @@ const MovieDescription = ({ movie }: Props) => {
             </View>
 
             {/* Budget */}
-            {movie.budget && (
+            {movie.budget > 0 ? (
                 <View className='flex-row items-center bg-green-500/15 px-4 py-3 rounded-xl border border-green-500/30'>
                     <Ionicons name="cash-outline" size={20} color="#22c55e" style={{ marginRight: 8 }} />
                     <View>
@@ -49,7 +49,7 @@ const MovieDescription = ({ movie }: Props) => {
                         </Text>
                     </View>
                 </View>
-            )}
+            ) : null}
         </View>
     )
 }
