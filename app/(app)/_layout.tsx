@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { Redirect } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
@@ -50,6 +50,8 @@ const DrawerLayout = () => {
             }}
         >
         </Drawer>
+
+
     );
 };
 
