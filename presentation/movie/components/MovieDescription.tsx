@@ -1,6 +1,7 @@
 import { Formatter } from '@/helpers/formatter';
 import { CompletedMovie } from '@/sync-movies/src/interfaces/movie.interface';
 import { Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 interface Props {
     movie: CompletedMovie;
@@ -8,28 +9,49 @@ interface Props {
 
 const MovieDescription = ({ movie }: Props) => {
     return (
-        <View className='mx-5' >
-            <View className='flex flex-row px-1 mt-1'>
-                <Text
-                    className="text-[#ffd700] text-base font-semibold"
-                >
-                    ⭐ {movie.rating ? movie.rating.toFixed(1) : 'N/A'}
-                </Text>
-                <Text className="text-neutral-300 ml-2">
-                    - {movie.genres.join(',  ')}
+        <View className='bg-[#1a1d29]/50 rounded-2xl p-5'>
+            {/* Rating & Genres */}
+            <View className='flex-row items-center flex-wrap mb-4' style={{ gap: 12 }}>
+                <View className='flex-row items-center bg-yellow-500/15 px-3 py-2 rounded-full border border-yellow-500/30'>
+                    <Ionicons name="star" size={16} color="#fbbf24" />
+                    <Text className="text-yellow-400 text-base font-bold ml-1.5">
+                        {movie.rating ? movie.rating.toFixed(1) : 'N/A'}
+                    </Text>
+                </View>
+                {movie.genres.map((genre, index) => (
+                    <View key={index} className='bg-blue-500/15 px-3 py-2 rounded-full border border-blue-500/30'>
+                        <Text className="text-blue-400 text-sm font-semibold">
+                            {genre}
+                        </Text>
+                    </View>
+                ))}
+            </View>
+
+            {/* Description */}
+            <View className='mb-4'>
+                <View className='flex-row items-center mb-3'>
+                    <View className='w-1 h-5 bg-blue-500 rounded-full mr-3' />
+                    <Text className='text-white text-lg font-bold'>Overview</Text>
+                </View>
+                <Text className='text-white/80 text-base leading-6'>
+                    {movie.description || 'No description available for this movie.'}
                 </Text>
             </View>
-            <Text className='text-neutral-200 mt-2 font-bold px-1' >Description</Text>
-            <Text className='text-neutral-200 mt-2 font-normal px-1' >{movie.description ? movie.description : 'No movie description...'}</Text>
 
-            <Text
-                className="color-green-500 text-base font-semibold mt-1 px-1"
-            >
-                {/* {(movie.budget ? movie.budget.toLocaleString('de-DE', { style: 'currency', currency: 'USD' }) : 'No Budget data')} */}
-                {movie.budget ? Formatter.currency(movie.budget) : 'No Budget data'}
-            </Text>
+            {/* Budget */}
+            {movie.budget && (
+                <View className='flex-row items-center bg-green-500/15 px-4 py-3 rounded-xl border border-green-500/30'>
+                    <Ionicons name="cash-outline" size={20} color="#22c55e" style={{ marginRight: 8 }} />
+                    <View>
+                        <Text className='text-green-400/70 text-xs font-semibold mb-0.5'>Budget</Text>
+                        <Text className="text-green-400 text-base font-bold">
+                            {Formatter.currency(movie.budget)}
+                        </Text>
+                    </View>
+                </View>
+            )}
         </View>
     )
 }
 
-export default MovieDescription
+export default MovieDescription;

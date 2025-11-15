@@ -10,66 +10,64 @@ interface Props {
 }
 
 const MovieHeader = ({ poster, originalTitle, title }: Props) => {
-
   const { height: screenHeight } = useWindowDimensions();
 
   return (
     <>
-      <LinearGradient
-        colors={['rgba(0,0,0,0.4)', 'transparent']}
-        start={[0, 0]}
-        end={[0, 0.5]}
-        style={{
-          height: screenHeight * 0.4,
-          position: 'absolute',
-          zIndex: 1,
-          width: '100%',
-        }}
-
-      />
-
-      <View style={{
-        position: 'absolute',
-        zIndex: 99,
-        elevation: 9,
-        top: 40,
-        left: 10,
-      }} >
-        <Pressable >
-          <Ionicons name='arrow-back'
-            size={30}
-            color='white'
-            className='shadow'
-            onPress={() => router.back()}
-          />
+      {/* Back Button */}
+      <View className='absolute top-12 left-4 z-50'>
+        <Pressable
+          onPress={() => router.back()}
+          className='w-10 h-10 rounded-full bg-black/60 justify-center items-center active:bg-black/80'
+          style={{
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.3,
+            shadowRadius: 4,
+            elevation: 5,
+          }}
+        >
+          <Ionicons name="arrow-back" size={22} color="#ffffff" />
         </Pressable>
       </View>
 
+      {/* Poster Image */}
       <View
         style={{ height: screenHeight * 0.7 }}
         className='shadow-xl shadow-black/20'
       >
-        <View className='flex-1 rounded-b-[25px] overflow-hidden ' >
+        <View className='flex-1 rounded-b-[32px] overflow-hidden'>
           <Image
             source={{ uri: poster }}
             resizeMode='cover'
             className='flex-1'
           />
+
+          {/* Top Gradient */}
+          <LinearGradient
+            colors={['rgba(15, 17, 23, 0.7)', 'transparent']}
+            className='absolute top-0 left-0 right-0 h-32'
+          />
+
+          {/* Bottom Gradient */}
+          <LinearGradient
+            colors={['transparent', 'rgba(15, 17, 23, 0.9)']}
+            className='absolute bottom-0 left-0 right-0 h-40'
+          />
         </View>
       </View>
 
-      <View className="px-6 mt-6 space-y-1">
-        <Text className="text-neutral-500 text-sm tracking-wide">
+      {/* Title Section */}
+      <View className="px-5 mt-5">
+        <Text className="text-white/50 text-xs tracking-widest uppercase mb-2 font-semibold">
           {originalTitle}
         </Text>
-        <Text className=" text-3xl text-neutral-300 font-semibold tracking-tight">
+        <Text className="text-4xl text-white font-bold tracking-tight leading-tight">
           {title}
         </Text>
       </View>
-
-
     </>
   )
 }
 
-export default MovieHeader
+export default MovieHeader;

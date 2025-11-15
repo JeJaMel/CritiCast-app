@@ -5,12 +5,26 @@ import { Ionicons } from '@expo/vector-icons';
 import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color';
 import * as Haptics from 'expo-haptics';
 import FilterModal from './modal/FilterModal';
+import { MovieFilters } from '@/core/movies/interfaces/filters.interface'; 
+import { router } from 'expo-router'; 
 
 const HeaderContent = () => {
     const backgroundColor = useThemeColor({}, 'background');
     const [query, setQuery] = useState('');
     const [isSearchFocused, setIsSearchFocused] = useState(false);
     const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
+
+    const handleApplyFilters = (filters: MovieFilters) => {
+        const finalFilters = {
+            ...filters,
+            search: query.trim().length > 0 ? query.trim() : undefined,
+        };
+
+        router.push({
+            pathname: '/search',
+            params: finalFilters
+        });
+    };
 
     return (
         <>
@@ -45,6 +59,7 @@ const HeaderContent = () => {
                             onChangeText={setQuery}
                             onFocus={() => setIsSearchFocused(true)}
                             onBlur={() => setIsSearchFocused(false)}
+                            onSubmitEditing={() => handleApplyFilters({})}
                             inputStyle={{
                                 fontSize: 14,
                                 textAlign: 'left',
@@ -92,6 +107,7 @@ const HeaderContent = () => {
             <FilterModal
                 visible={isFilterModalVisible}
                 onClose={() => setIsFilterModalVisible(false)}
+                onApply={handleApplyFilters}
             />
         </>
     );

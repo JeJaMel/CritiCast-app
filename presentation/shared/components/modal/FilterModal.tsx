@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Pressable, Modal, ScrollView } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import ModalHeader from './ModalHeader';
@@ -6,14 +6,16 @@ import SortBySection from './SortBySection';
 import CategoriesSection from './CategoriesSection';
 import ActionButtons from './ActionButtons';
 import RatingsSection from './RatingSection';
+import { MovieFilters } from '@/core/movies/interfaces/filters.interface';
 
-// Define the props interface for the modal
+// props interface for the modal
 interface FilterModalProps {
     visible: boolean;
     onClose: () => void;
+    onApply: (filters: MovieFilters) => void;
 }
 
-const FilterModal = ({ visible, onClose }: FilterModalProps) => {
+const FilterModal = ({ visible, onClose, onApply }: FilterModalProps) => {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [selectedRating, setSelectedRating] = useState<string | null>(null);
     const [sortBy, setSortBy] = useState('rating');
@@ -43,7 +45,24 @@ const FilterModal = ({ visible, onClose }: FilterModalProps) => {
 
     const handleApplyFilters = () => {
         Haptics.selectionAsync();
-        // TODO: ADD real logic 
+        // 1. Traduce el estado local a la interfaz de filtros
+        const filters: MovieFilters = {
+            sortBy: sortBy as MovieFilters['sortBy'],
+        };
+
+        if (selectedRating) {
+            filters.tmdbRatingFrom = parseInt(selectedRating, 10);
+        }
+
+        if (selectedCategories.length > 0) {
+            // Une las categorías con comas y maneja espacios (ej. "Science Fiction")
+            filters.genres = selectedCategories
+                .map(genre => encodeURIComponent(genre))
+                .join(',');
+        }
+
+        // 2. Llama a la función del padre con los filtros listos
+        onApply(filters);
         onClose();
     };
 
