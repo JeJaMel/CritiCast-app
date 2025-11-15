@@ -4,6 +4,7 @@ export interface Movie {
     description: string;
     releaseDate: Date;
     rating: number;
+    user_rating: number;
     poster: string;
     backdrop: string;
 }

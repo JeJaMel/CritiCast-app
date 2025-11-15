@@ -18,7 +18,6 @@ const mapApiMovieToMoviesUI = (apiMovie: any): MoviesUI => {
         poster: safeTmdbUrl(apiMovie.poster_url),
         backdrop: safeTmdbUrl(apiMovie.backdrop_url),
         rating: apiMovie.tmdb_rating ?? apiMovie.rating,
-        user_rating: apiMovie.user_rating,
         releaseDate: apiMovie.release_date ? new Date(apiMovie.release_date) : (apiMovie.releaseDate ?? null),
     } as MoviesUI;
 };
@@ -27,6 +26,7 @@ export const mapApiMovieToCompletedMovie = (apiMovie: any): CompletedMovie => {
     return {
         ...mapApiMovieToMoviesUI(apiMovie),
         genres: apiMovie.genres ?? apiMovie.genre_names ?? [],
+        user_rating: apiMovie.user_rating ?? apiMovie.userRating ?? null,
         duration: Number(apiMovie.runtime ?? apiMovie.duration ?? 0),
         budget: Number(apiMovie.budget ?? 0),
         originalTitle: apiMovie.original_title ?? apiMovie.originalTitle ?? '',

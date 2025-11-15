@@ -4,6 +4,7 @@ import { Result } from "../interfaces/moviedb-response";
 
 export class MovieMapper {
     static fromTheMovieDBToMovie = (movie: Result): Movie => {
+        //@ts-ignore
         return {
             id: movie.id,
             title: movie.title,
