@@ -64,7 +64,8 @@ const HomeScreen = () => {
             >
                 {/* Header Section with Gradient Overlay */}
                 <View className='relative'>
-                    {/* Main Carousel */}
+                    {/* Main Carousel */
+                       /*@ts-ignore */}
                     <MainSlideShow movies={nowPlayingQuery.data ?? []} />
 
                     {/* Gradient Overlay */}
@@ -101,7 +102,7 @@ const HomeScreen = () => {
                             </Text>
                         </View>
                         <Text className='text-sm text-white/60 ml-4'>
-                            Most popular movies right now
+                            Most popular movies between CritiCast users
                         </Text>
                     </View>
 
@@ -122,7 +123,7 @@ const HomeScreen = () => {
                             </Text>
                         </View>
                         <Text className='text-sm text-white/60 ml-8'>
-                            Highest rated by CritiCast users
+                            Highest rated by Critic users
                         </Text>
                     </View>
 

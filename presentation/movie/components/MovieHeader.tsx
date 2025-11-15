@@ -7,9 +7,10 @@ interface Props {
   poster: string;
   originalTitle: string;
   title: string;
+  releaseDate?: string;
 }
 
-const MovieHeader = ({ poster, originalTitle, title }: Props) => {
+const MovieHeader = ({ poster, originalTitle, title, releaseDate }: Props) => {
   const { height: screenHeight } = useWindowDimensions();
 
   return (
@@ -59,9 +60,16 @@ const MovieHeader = ({ poster, originalTitle, title }: Props) => {
 
       {/* Title Section */}
       <View className="px-5 mt-5">
-        <Text className="text-white/50 text-xs tracking-widest uppercase mb-2 font-semibold">
-          {originalTitle}
-        </Text>
+        <View className="flex-row items-center justify-between mb-2">
+          <Text className="text-white/50 text-xs tracking-widest uppercase font-semibold" numberOfLines={1}>
+            {originalTitle}
+          </Text>
+          {releaseDate ? (
+            <Text className="text-white/50 text-xs tracking-widest uppercase font-semibold">
+              {releaseDate}
+            </Text>
+          ) : null}
+        </View>
         <Text className="text-4xl text-white font-bold tracking-tight leading-tight">
           {title}
         </Text>

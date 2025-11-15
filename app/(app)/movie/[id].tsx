@@ -82,6 +82,7 @@ const MovieScreen = () => {
                             poster={movieQuery.data.poster}
                             originalTitle={movieQuery.data.originalTitle}
                             title={movieQuery.data.title}
+                            releaseDate={movieQuery.data.releaseDate.toLocaleDateString()} // or .toISOString()
                         />
 
                     </View>
@@ -123,7 +124,7 @@ const MovieScreen = () => {
                     <View className='mb-8'>
                         <MovieComments
                             movieId={movieId}
-                            currentUserId={user?.id} 
+                            currentUserId={user?.id}
                         />
                     </View>
 

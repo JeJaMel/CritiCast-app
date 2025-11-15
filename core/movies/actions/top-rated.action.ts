@@ -9,7 +9,7 @@ interface FetchMoviesOptions {
 
 export const topRatedMoviesAction = async ({ page = 1, limit = 15 }: FetchMoviesOptions) => {
     try {
-        const { data } = await moviesApi.get<any>('/movies', {
+        const { data } = await moviesApi.get<any>('/movies/top-rated', {
             params: {
                 page,
                 limit: limit,

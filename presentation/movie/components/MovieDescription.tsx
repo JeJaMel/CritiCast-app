@@ -20,15 +20,13 @@ const MovieDescription = ({ movie }: Props) => {
                 </View>
 
                 {/* User Rating */}
-                {movie.user_rating && movie.user_rating > 0 && (
-                    <View className='flex-row items-center bg-blue-500/15 px-3 py-2 rounded-full border border-blue-500/30'>
-                        <Ionicons name="people" size={16} color="#3b82f6" />
-                        <Text className="text-blue-400 text-base font-bold ml-1.5">
-                            {movie.user_rating.toFixed(1)}
-                        </Text>
-                        <Text className="text-blue-400/60 text-xs font-semibold ml-1"></Text>
-                    </View>
-                )}
+                <View className='flex-row items-center bg-blue-500/15 px-3 py-2 rounded-full border border-blue-500/30'>
+                    <Ionicons name="people" size={16} color="#3b82f6" />
+                    <Text className="text-blue-400 text-base font-bold ml-1.5">
+                        {(movie.user_rating && movie.user_rating > 0) ? movie.user_rating.toFixed(1) : '0'}
+                    </Text>
+                    <Text className="text-blue-400/60 text-xs font-semibold ml-1"></Text>
+                </View>
 
                 {movie.genres.map((genre, index) => (
                     <View key={index} className='bg-blue-500/15 px-3 py-2 rounded-full border border-blue-500/30'>

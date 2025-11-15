@@ -18,6 +18,7 @@ const mapApiMovieToMoviesUI = (apiMovie: any): MoviesUI => {
         poster: safeTmdbUrl(apiMovie.poster_url),
         backdrop: safeTmdbUrl(apiMovie.backdrop_url),
         rating: apiMovie.tmdb_rating ?? apiMovie.rating,
+        user_rating: apiMovie.user_rating ?? null,
         releaseDate: apiMovie.release_date ? new Date(apiMovie.release_date) : (apiMovie.releaseDate ?? null),
     } as MoviesUI;
 };
