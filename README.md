@@ -2,8 +2,8 @@
 
 **CritiCast** is a modern, cross-platform movie and series review application built with React Native and Expo. It provides a rich user experience for browsing, searching, and rating films, powered by The Movie Database (TMDB) API and a custom backend.
 
-![CritiCast Banner](https://via.placeholder.com/1200x400.png?text=CritiCast+App+Banner)
-*(Replace this with a cool banner for your app!)*
+![CritiCast Banner](https://i.imgur.com/5QYHasn.jpeg)
+
 
 ---
 
@@ -21,11 +21,14 @@
 
 ## 📱 Screenshots
 
-*(Replace these placeholders with actual screenshots of your app!)*
+| Home Screen                                     | Profile Drawer                                  |
+| ----------------------------------------------- | ----------------------------------------------- |
+|  |  |
+| ![Home Screen](https://i.imgur.com/h45Yhqs.jpeg) | ![Profile Drawer](https://i.imgur.com/hWjgJFZ.jpeg) |
 
-| Home Screen                                       | Movie Details                                     | Profile Drawer                                    |
-| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| ![Home Screen](https://via.placeholder.com/300x600.png?text=Home+Screen) | ![Movie Details](https://via.placeholder.com/300x600.png?text=Movie+Details) | ![Profile Drawer](https://via.placeholder.com/300x600.png?text=Profile+Drawer) |
+| Movie Details (Main)                              | Movie Details (Reviews)                           |
+| ------------------------------------------------- | ------------------------------------------------- |
+| ![Movie Details](https://i.imgur.com/gUSNLLr.jpeg) | ![Movie Details Reviews](https://i.imgur.com/h5is1fU.jpeg) |
 
 ---
 
@@ -109,3 +112,20 @@ Follow these instructions to get the project up and running on your local machin
 ## 📂 Project Structure
 
 The project follows a feature-sliced design approach to keep the code organized and scalable.
+
+├── app/ # Expo Router file-based routing.
+
+├── core/ # Core business logic (actions, mappers, interfaces)
+
+├── presentation/ # All UI-related code (components, hooks, screens, store)
+
+├── assets/ # Static assets like fonts and images
+
+├── helpers/ # Helper functions and adapters
+
+└── ... # Configuration files (eas.json, app.json, etc.)
+
+## 🙏 Acknowledgements
+
+-   This project uses the [TMDb API](https://www.themoviedb.org/documentation/api) but is not endorsed or certified by TMDb.
+-   Built with the tools provided by the [Expo](https://expo.dev/) team and the open-source community.
