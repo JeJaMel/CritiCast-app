@@ -6,7 +6,11 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "http://localhost:4000",
+        "EXPO_PUBLIC_API_URL_ANDROID": "http://192.168.1.210:4000"
+      }
     },
     "preview": {
       "distribution": "internal"
@@ -17,12 +21,8 @@
       },
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_MOVIE_DB_URL": "https://api.themoviedb.org/3",
-        "EXPO_PUBLIC_MOVIE_DB_KEY": "***REMOVED***",
         "EXPO_PUBLIC_STAGE": "prod",
-        "EXPO_PUBLIC_API_URL": "https://criticast-backend.onrender.com",
-        "EXPO_PUBLIC_API_URL_IOS": "http://localhost:4000",
-        "EXPO_PUBLIC_API_URL_ANDROID": "http://192.168.1.210:4000"
+        "EXPO_PUBLIC_API_URL": "https://criticast-backend.onrender.com"
       }
     }
   },

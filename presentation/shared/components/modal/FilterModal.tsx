@@ -21,7 +21,7 @@ const FilterModal = ({ visible, onClose, onApply }: FilterModalProps) => {
     const [sortBy, setSortBy] = useState('rating');
 
     const categories = [
-        'Action', 'Adventure', 'Animation', 'Comedy', 'Science-Fiction',
+        'Action', 'Adventure', 'Animation', 'Comedy', 'Science Fiction',
         'Crime', 'Documentary', 'Drama', 'Fantasy', 'Horror', 'Mystery',
         'Romance', 'Thriller', 'War', 'Western'
     ];
@@ -45,7 +45,6 @@ const FilterModal = ({ visible, onClose, onApply }: FilterModalProps) => {
 
     const handleApplyFilters = () => {
         Haptics.selectionAsync();
-        // 1. Traduce el estado local a la interfaz de filtros
         const filters: MovieFilters = {
             sortBy: sortBy as MovieFilters['sortBy'],
         };
@@ -55,13 +54,11 @@ const FilterModal = ({ visible, onClose, onApply }: FilterModalProps) => {
         }
 
         if (selectedCategories.length > 0) {
-            // Une las categorías con comas y maneja espacios (ej. "Science Fiction")
             filters.genres = selectedCategories
                 .map(genre => encodeURIComponent(genre))
                 .join(',');
         }
 
-        // 2. Llama a la función del padre con los filtros listos
         onApply(filters);
         onClose();
     };
